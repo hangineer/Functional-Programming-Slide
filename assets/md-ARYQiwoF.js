@@ -1,0 +1,6 @@
+import{aJ as l,b as f,o as r,w as g,g as p,ah as e,i as m,f as s,ad as i,v,x,S as u}from"./modules/vue-ByaFkLfc.js";import{I as k}from"./slidev/default-OSQRsGrB.js";import{u as w,f as b}from"./slidev/context-C-rGaWvD.js";import"./index-hztOwWZi.js";import"./modules/shiki-DxovNVNZ.js";const V={__name:"slides.md__slidev_70",setup(E){const{$clicksContext:a,$frontmatter:d}=w();return a.setup(),(j,t)=>{const o=l("click"),n=l("after");return r(),f(k,v(x(u(b)(u(d),69))),{default:g(()=>[t[6]||(t[6]=p("h1",null,"總結：呼叫圖告訴我們的訊息",-1)),t[7]||(t[7]=p("br",null,null,-1)),e((r(),s("p",null,t[0]||(t[0]=[i("▫️可維護性：一個函式與上層連接的箭頭越少，修改起來越安全")]))),[[o]]),e((r(),s("p",null,t[1]||(t[1]=[i("實務建議：將經常改變的程式碼放到上層去")]))),[[n]]),e((r(),s("p",null,t[2]||(t[2]=[i("▫️可測試性：一個函式與上層連接的箭頭越多，測試價值越高")]))),[[o]]),e((r(),s("p",null,t[3]||(t[3]=[i("實務建議：把測試重點放在底層函式")]))),[[n]]),e((r(),s("p",null,t[4]||(t[4]=[i("▫️可重複使用性：一個函式下方的其他函式越少，可重複使用性越高")]))),[[o]]),e((r(),s("p",null,t[5]||(t[5]=[i("實務建議：將函式的程式碼擷取成底層函式，增加重複使用性")]))),[[n]]),m(" ::right:: "),m(` <br>
+<img width=300 src="https://i.imgur.com/vEpEJ6e.jpeg" />
+<br>
+<img width=300 src="https://i.imgur.com/vEpEJ6e.jpeg" />
+<br>
+<img width=300 src="https://i.imgur.com/3OnQtrz.jpeg" /> `)]),_:1},16)}}};export{V as default};
