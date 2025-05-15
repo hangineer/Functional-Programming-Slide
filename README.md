@@ -9,3 +9,7 @@
 >- `pnpm install`
 > - `pnpm dev`
 > - visit <http://localhost:3030>
+
+
+## 讀書會各章節筆記 Each chapter's notes
+https://github.com/Tech-Book-Community/Functional-Programming/discussions
