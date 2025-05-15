@@ -695,10 +695,9 @@ level: 2
 # 以「函式」檢視等級查看單一函式的箭頭關係
 <p v-click>以 remove_item_by_name() 為例</p>
 <img v-after src="https://i.imgur.com/DBDI7NJ.jpeg" />
-<!-- CHECK: 直觀的實作裡要有 -->
-<p v-click>即便在單一函式，我們也用了來自兩個層的元素，這樣的設計不能稱為直觀</p>
-<p v-click>箭頭長度應要一致</p>
-<p v-click>常見做法是加入「中繼函式」</p>
+<p>即便在單一函式，我們也用了來自兩個層的元素，這樣的設計不能稱為直觀</p>
+<p>箭頭長度應要一致</p>
+<p>常見做法是加入「中繼函式」</p>
 
 ---
 transition: slide-up
@@ -708,6 +707,7 @@ level: 2
 <h3>加入中繼函式後</h3>
 <img v-click src="https://i.imgur.com/aMHAbyo.jpeg" />
 
+<!-- NOTE: 在屏障中加入新函式，已移除跨越屏障的箭頭 -->
 
 ---
 layout: two-cols
@@ -731,8 +731,8 @@ function remove_item_by_name(cart, name) {
   return cart;
 }
 ```
-<p v-click>擷取 for loop 封裝程函式後，便能重複利用該函式</p>
-<p v-click>當具有良好的分層時，函式經常可以重複利用</p>
+<p>擷取 for loop 封裝程函式後，便能重複利用該函式</p>
+<p>當具有良好的分層時，函式經常可以重複利用</p>
 
 ::right::
 
@@ -786,8 +786,8 @@ level: 2
 ```javascript
 function isInCart(cart, name) {
   for (var i = 0; i < cart.length; i++) {
-    if(cart[i].name === name) return true;
-   }
+    if (cart[i].name === name) return true;
+  }
    return false;
 }
 
@@ -800,6 +800,8 @@ function indexOfItem(cart, name) {
 ```
 <p>1. 請用其中一個函式實作另一個</p>
 <p>2. 畫出修改前、後的呼叫圖</p>
+
+<!-- NOTE:  相同：找出特定的商品後，去做對應的操作-->
 
 ---
 transition: slide-up
@@ -834,7 +836,7 @@ level: 2
 
 <p>setPriceByName() 裡有一個和 indexOfItem() 相似的 for loop</p>
 
-```javascript{3-6,11-13}
+```javascript{3-7,11-14}
 function setPriceByName(cart, name, price) {
   var cartCopy = cart.slice();
   for (var i = 0; i < cartCopy.length; i++) {
@@ -855,7 +857,21 @@ function indexOfItem(cart, name) {
 <p>1. 請用其中一個函式實作另一個</p>
 <p>2. 畫出修改前、後的呼叫圖</p>
 
+<!-- NOTE:
+  setPriceByName 接受三個參數：
 
+  cart：購物車陣列（陣列中的每個元素是一個商品物件）
+  name：要修改的商品名稱
+  price：新的價格
+
+  使用 .slice() 對 cart 做 淺拷貝（寫入時複製），確保不會改到原始陣列 → 保持 不可變性 (immutability)
+  迴圈的功能是：
+
+  逐一走訪複製後的購物車
+  如果找到商品名稱符合的項目，就用 setPrice() 更新該商品的價格
+  setPrice(item, price) 應該是會建立新物件的函式（不直接修改舊的 item）
+  回傳這個已經更新價格的購物車（新的陣列）
+ -->
 ---
 transition: slide-up
 level: 2
@@ -888,8 +904,8 @@ level: 2
 ---
 
 <img width=750 src="https://i.imgur.com/WAhXuUs.png" />
-<p v-click>一個長箭頭被短箭頭取代了</p>
-<p v-click>優化還沒結束，類似的修改還能繼續改下去</p>
+<p>一個長箭頭被短箭頭取代了</p>
+<p>優化還沒結束，類似的修改還能繼續改下去</p>
 <!-- NOTE: 呼叫圖似乎沒比較好，一個長箭頭被短箭頭取代了，類似的修改還能繼續改下去 -->
 
 
@@ -946,8 +962,10 @@ function setPriceByName(cart, name, price) {
 ```
 <img width=680 src="https://i.imgur.com/1M6hbS6.png" />
 
-<!-- NOTE: 有一個箭頭縮短了，指向了 arraySet，雖然指向的層數變多了，但重點是箭頭長度的縮短，表示
-  呼叫 setPriceByName 時我們能忽略更多細節
+<!-- NOTE:
+  arraySet(array, idx, value) // 以寫入時複製，將元素指定到傳入的 array index 位置上
+  有一個箭頭縮短了，指向了 arraySet，雖然指向的層數變多了，但重點是箭頭長度的縮短
+  表示呼叫 setPriceByName 時我們能忽略更多細節
   但 setPriceByName 依然指向底層的 areay index，若覺得不直觀，請相信這種感覺
   就是藉由這感覺找出可以截取成通用函式的程式碼，
 -->
@@ -994,7 +1012,7 @@ layoutClass: gap-18
   <p>C. 呼叫計算總價的函式</p>
   <p>D. 判斷是否免運費的邏輯</p>
 </div>
-<!-- NOTE: 第二題答案：for 迴圈屬於底層邏輯，應封裝 -->
+
 <p style="color: red" v-click>答案：B</p>
 
 ::right::
@@ -1010,7 +1028,12 @@ layoutClass: gap-18
 <a href="https://codepen.io/hangineer/pen/RNNvMvG" target="_blank">題目連結</a>
 </div>
 <p style="color: red" v-click>答案：<a href="https://codepen.io/hangineer/pen/myyvxvO" target="_blank">連結（供參）</a></p>
-
+<!-- NOTE:
+  第一題答案：C
+  第二題答案：B (for 迴圈屬於底層邏輯，應封裝)
+  第三題答案：getFinalPrice()
+  第四題答案：有連結可看
+-->
 
 ---
 transition: slide-up
@@ -1037,11 +1060,13 @@ function applyShipping(cart) {
 <div v-click>
   <p>A. applyShipping()</p>
   <p>B. setShippingCost()</p>
-  <p>C. 判斷是否有高價商品的那段 for 迴圈邏輯</p>
+  <p>C. 判斷是否有高價商品的 for 迴圈邏輯</p>
   <p>D. 整段判斷邏輯從 hasFreeShipping 到 return</p>
 </div>
 
 <p style="color: red" v-click>答案：C</p>
+
+<!-- NOTE: 第五題答案：C -->
 
 ---
 ## transition: fade-out
@@ -1134,7 +1159,7 @@ level: 2
 </div>
 <p v-click>處的 API 實際上就是抽象屏障，區隔了我們和第三方所負責的工作</p>
 
-<!-- NOTE: 講完第一句後：這樣的忽略是雙向的，行銷部門和開發小組的工作可以完全獨立
+<!-- NOTE: 講完第一句後：行銷部門和開發小組的工作可以完全獨立
 講完現實中...：此處的 API 實際上就是抽象屏障，區隔了我們和第三方所負責的工作
  -->
 
