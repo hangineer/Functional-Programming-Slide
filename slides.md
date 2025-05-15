@@ -1771,7 +1771,7 @@ layoutClass: gap-16
 -->
 ::right::
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<img width=300 src="https://i.imgur.com/vEpEJ6e.jpeg" />
+<img width=300 src="https://i.imgur.com/uYh0ywT.jpeg" />
 
 
 ---
