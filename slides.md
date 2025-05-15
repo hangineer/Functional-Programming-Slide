@@ -117,7 +117,7 @@ level: 2
 
 <p class="pt-2" v-click>「原則」就是 ...</p>
 <h2 v-click>分層設計 Stratified Design</h2>
-<!-- NOTE: 設計完善的程式應讓人感到放心，協助我們度過開發週期中的每個階段，包括構想、程式撰寫、測試、維護 -->
+<!-- NOTE: 定義不用背後：設計完善的程式應讓人感到放心，協助我們度過開發週期中的每個階段，包括構想、程式撰寫、測試、維護 -->
 
 ---
 transition: slide-up
@@ -180,8 +180,10 @@ level: 2
 </div>
 
 <p v-after>🔺 可把「輸入」當成優化程式的線索</p>
-<!-- NOTE: 有些名詞看不懂沒關係，後面透過範例再慢慢感受 -->
-<!-- NOTE: 當遇到優化程式碼的時候，可以從這些線索著手 -->
+<!-- NOTE:
+  有些名詞看不懂沒關係，後面透過範例再慢慢感受
+  當遇到優化程式碼的時候，可以從這些線索著手
+-->
 
 ---
 transition: slide-up
@@ -243,9 +245,10 @@ level: 2
 <h3 v-click>🔺原則 4：分層只要舒適即可</h3>
 <p v-click>勿過度追求完美</p>
 
-<!-- NOTE: 第 8 和 9 章或從多個面向討論分層設計，可以總結成四大原則 -->
-<!-- NOTE: 分層應該讓你事半功倍，而不是讓事情變得更複雜 -->
-<!-- NOTE: 本章會著在在原則一來介紹 -->
+<!-- NOTE:
+  勿過度追求完美：分層應該讓你事半功倍，而不是讓事情變得更複雜
+  本章會先介紹原則一，剩下的下一章會介紹
+-->
 
 ---
 transition: slide-up
@@ -277,11 +280,12 @@ function freeTieClip(cart) {
 <p v-click>這段程式碼有什麼問題？</p>
 <p v-click>存在太多細節，在迴圈中做邏輯判斷與副作用，職責混亂，不符合「層」的思考，不直觀也不利於維護</p>
 
-<!-- NOTE: 本章節會討論原則 1-->
-<!-- NOTE: 這段函式做了
+<!-- NOTE:
+這段函式做了
   1. 遍歷購物車
   2. 檢查商品內容並作出相對應的決策
 -->
+
 
 ---
 layout: two-cols
@@ -294,8 +298,8 @@ layoutClass: gap-16
 ::right::
 <br><br>
 <p>情境：MegaMart 決定為購物車有關的函式做優化，以下是成員們列出的一系列購物車基本操作：</p>
-<p v-click>✔️ 的項目代表程式碼已存在</p>
-<p v-click>有兩項操作尚未被實作，這是等等的任務</p>
+<p>✔️ 的項目代表程式碼已存在</p>
+<p>有兩項操作尚未被實作，這是等等的任務</p>
 
 ---
 transition: slide-up
@@ -304,7 +308,7 @@ level: 2
 
 # 檢查商品是否存在於購物車內
 
-```javascript {all|5-11}
+```javascript {all|5-10}
 // 使用者購買領帶，即贈送一個領帶夾
 function freeTieClip(cart) {
   var hasTie = false
@@ -339,7 +343,7 @@ layoutClass: gap-18
 
 <p>Before</p>
 
-```javascript{all|5-9}
+```javascript{all|1-3,5-9}
 function freeTieClip(cart) {
   var hasTie = false
   var hasTieClip = false;
@@ -438,8 +442,8 @@ level: 2
 
 <h3>優化後的呼叫圖</h3>
 <img width=700 height=300 src="https://i.imgur.com/F8T9znE.jpeg" />
-<p v-click>把不同的抽象層級拆開，程式內建元素是一層，自行撰寫的函式是一層</p>
-<h4 v-click>但在直觀的實作中，需使用抽象層級相當的元素，現在的呼叫圖有不同層級的元素...</h4>
+<p>把不同的抽象層級拆開，程式內建元素是一層，自行撰寫的函式是一層</p>
+<h4 v-click>但在原則 1：直觀的實作中，需使用抽象層級相當的元素，現在的呼叫圖有不同層級的元素...</h4>
 <h4 v-click>這也會讓函式沒那麼直觀</h4>
 ---
 transition: slide-up
@@ -477,7 +481,7 @@ level: 2
 <p>新版的呼叫圖</p>
 <img width=600 height=300 src="https://i.imgur.com/9I8E1lb.jpeg" />
 <p>isInCart() 呼叫了兩次，但在呼叫圖中畫一次就好</p>
-<p v-click>呼叫圖中皆是抽象層級相當的元素</p>
+<p>呼叫圖中皆是抽象層級相當的元素</p>
 
 
 ---
@@ -487,12 +491,12 @@ level: 2
 
 # 呼叫圖 Q & A
 
-* Q1：有必要畫呼叫圖嗎？從程式碼應該就能看出問題了吧
+* Q1：有必要畫呼叫圖嗎？從程式碼應該就能看出問題了吧？
 * A1：畫呼叫圖只是用來確認呼叫關係，並非必要。但隨著程式的複雜性提高，函式越來越多，層的數量也會增加，這時呼叫圖就能提供一個全局觀，對於培養設計直覺非常有幫助
 <br />
 <br />
 * Q2：每次寫程式都要畫呼叫圖嗎？
-* A2：只要熟悉分層架構，完全可以在腦中建構呼叫圖。不過，當要與他人合作時，呼叫圖不失為一個有效溝通的工具
+* A2：只要熟悉分層架構，就可以在腦中建構呼叫圖，所以也並非必要。不過，當要與他人合作時，呼叫圖不失為一個有效溝通的工具
 <br />
 <br />
 * Q3：這些「層」是真實存在嗎？有可能不同人畫出來的層不一樣嗎？
@@ -508,11 +512,11 @@ level: 2
 ```javascript
 function remove_item_by_name(cart, name) { // 移除一項商品
   var idx = null;
-  for (var i = 0; i < cart.length; i++) {
-    if(cart[i].name === name) idx = i;
+  for (var i = 0; i < cart.length; i++) { // 遍歷購物車中的每一個商品，如果找到商品，就把該 i 存入 idx
+    if (cart[i].name === name) idx = i;
   }
-  if (idx !== null) return removeItems(cart, idx, 1);
-  return cart;
+  if (idx !== null) return removeItems(cart, idx, 1); // 找到商品，就呼叫 removeItems 移除它
+  return cart; // 回傳原始的 cart
 }
 ```
 
@@ -605,7 +609,7 @@ level: 2
 ---
 
 <h3>解答</h3>
-<img width=700 src="https://i.imgur.com/WbdCuH8.jpeg" alt="8-2 解答" />
+<img v-click width=700 src="https://i.imgur.com/WbdCuH8.jpeg" alt="8-2 解答" />
 
 <p v-click>所有箭頭都朝下，不該有平行或向上箭頭</p>
 <!-- NOTE:
@@ -624,12 +628,14 @@ level: 2
 # 同一層的函式應服務相同目的
 <img width=650 src="https://i.imgur.com/kEbzCs1.jpeg" />
 <ul>
-  <li v-click>每個層都代表一個「抽象層級」</li>
-  <!-- NOTE: 當呼叫購物車業務邏輯的函式時，我們不需要知道購物車是以陣列實作的，因為購物車的操作那層會處理 -->
-  <li v-click>當某一層的函式被呼叫時，不需擔心任何低於該層的細節</li>
-  <!-- NOTE: 箭頭有些只跨一層，有些跨三層，這代表同層中的函式有不同細節程度 -->
-  <li v-click>箭頭很亂也代表程式的呼叫關係也很亂！直觀的實作中，箭頭長度要一致</li>
+  <li>每個層都代表一個「抽象層級」</li>
+  <li>當某一層的函式被呼叫時，不需擔心任何低於該層的細節</li>
+  <li>箭頭很亂也代表程式的呼叫關係也很亂！直觀的實作中，箭頭長度要一致</li>
 </ul>
+<!-- NOTE:
+  不需擔心任何低於該層的細節：當呼叫購物車業務邏輯的函式時，我們不需要知道購物車是以陣列實作的，因為購物車的操作那層會處理
+  箭頭長度要一致：箭頭有些只跨一層，有些跨三層，這代表同層中的函式有不同細節程度
+-->
 
 
 ---
