@@ -1786,7 +1786,7 @@ level: 2
   <p>B. B()</p>
   <p>C. C()</p>
 </div>
-<img v-after width=300 src="https://i.imgur.com/vEpEJ6e.jpeg" />
+<img v-after width=300 src="https://i.imgur.com/uYh0ywT.jpeg" />
 <p style="color: red" v-click>答案：A</p>
 
 <!-- NOTE:
